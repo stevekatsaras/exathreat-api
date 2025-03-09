@@ -1,0 +1,55 @@
+buildscript {
+	repositories {
+		jcenter()
+		mavenCentral()
+    maven { url "https://repo.spring.io/release" }
+		maven { url "https://repo.spring.io/milestone" }
+		maven { url "https://repo.spring.io/snapshot" }
+	}
+}
+
+plugins {
+	id "io.spring.dependency-management" version "1.0.11.RELEASE" // update latest version number from this reference: https://plugins.gradle.org/plugin/io.spring.dependency-management
+  id "org.springframework.boot" version "2.6.4" // update latest version number from this reference: https://spring.io/projects/spring-boot
+}
+
+apply plugin: "io.spring.dependency-management"
+apply plugin: "java"
+apply plugin: "org.springframework.boot"
+
+repositories {
+	jcenter()
+	mavenCentral()
+  maven { url "https://repo.spring.io/release" }
+	maven { url "https://repo.spring.io/milestone" }
+	maven { url "https://repo.spring.io/snapshot" }
+}
+
+group = projectGroup
+
+bootRun {
+	systemProperties = System.properties
+	sourceResources sourceSets.main
+}
+
+configurations {
+	implementation.exclude module: "spring-boot-starter-tomcat"
+	implementation.exclude group: "org.apache.tomcat"
+}
+
+dependencies {
+	annotationProcessor group: "org.projectlombok", name: "lombok"
+	implementation platform('software.amazon.awssdk:bom:2.17.148') // update latest version number from this reference: https://sdk.amazonaws.com/java/api/latest/
+	implementation group: "com.github.ben-manes.caffeine", name: "caffeine"
+	implementation group: "com.networknt", name: "json-schema-validator", version: "1.0.60"
+	implementation group: "mysql", name: "mysql-connector-java", version: "8.0.20"
+	// implementation group: "org.elasticsearch.client", name: "elasticsearch-rest-high-level-client"
+  implementation group: "org.projectlombok", name: "lombok"
+  implementation group: "org.springframework.boot", name: "spring-boot-starter-actuator"
+	implementation group: "org.springframework.boot", name: "spring-boot-starter-cache"
+	implementation group: "org.springframework.boot", name: "spring-boot-starter-data-jdbc"
+  implementation group: "org.springframework.boot", name: "spring-boot-starter-web"
+  implementation group: "org.springframework.boot", name: "spring-boot-starter-webflux"
+	implementation group: "software.amazon.awssdk", name: "s3"
+	runtimeOnly group: "org.springframework.boot", name: "spring-boot-devtools"
+}

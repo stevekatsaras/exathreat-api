@@ -1,0 +1,12 @@
+/bin/
+/build/
+/.gradle/
+/gradle/
+.DS_Store
+.idea/*
+.settings/org.eclipse.jdt.apt.core.prefs
+.settings/org.eclipse.jdt.core.prefs
+
+.classpath
+.settings/org.eclipse.buildship.core.prefs
+.project

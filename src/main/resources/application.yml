@@ -1,0 +1,27 @@
+server:
+  port: 8080
+  servlet:
+    session:
+      cookie:
+        http-only: false
+      tracking-modes:
+      - cookie
+  forward-headers-strategy: framework
+spring:
+  application:
+    name: exathreat-api
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      minimum-idle: 1
+      maximum-pool-size: 5 # connections = ((core_count * 2) + effective_spindle_count); https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing
+  mvc:
+    async:
+      request-timeout: 300000 # 300 secs / 5 mins
+  webflux:
+    base-path: /api
+
+management:
+  health:
+    elasticsearch:
+      enabled: false
